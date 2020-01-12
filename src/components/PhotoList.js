@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
-import Photo from './photo';
+import Photo from './Photo';
 
 import * as actions from '../actions/photo';
 
