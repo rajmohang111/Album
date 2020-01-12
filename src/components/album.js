@@ -6,7 +6,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-import PhotoList from './PhotoList';
+import PhotoList from './photoList';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -21,7 +21,8 @@ const useStyles = makeStyles(theme => ({
 export default function Album(props) {
     const classes = useStyles();
 
-    const [album, setAlbum] = useState(props.album);
+    const { album } = props;
+
     const [expand, setExpand] = useState(false);
 
     const expandPanel = () => {

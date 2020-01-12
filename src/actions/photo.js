@@ -1,5 +1,11 @@
 
-import * as API from '../Services/Api';
+import * as API from '../services/api';
+
+export function setPhotos(photos) {
+  return (dispatch, getState) => {
+    dispatch({ type: "SET_PHOTOS", payload: photos })
+  }
+}
 
 export function getPhotos(id) {
   return (dispatch, getState) => {

@@ -1,5 +1,5 @@
 
-import * as API from '../Services/Api';
+import * as API from '../services/api';
 
 export function setAlbum(albums) {
   return (dispatch, getState) => {

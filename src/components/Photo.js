@@ -64,7 +64,7 @@ export default function Photo(props) {
                     </IconButton>
                 </DialogTitle>
                 <DialogContent>
-                     <img src={photo.url} alt={photo.title} width="100%" />
+                     <img src={photo.url} alt={photo.title}  />
                 </DialogContent>
             </Dialog>
         </Grid>

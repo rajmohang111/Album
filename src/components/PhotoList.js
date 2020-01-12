@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import { makeStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Grid from '@material-ui/core/Grid';
 
-import Photo from './Photo';
+import Photo from './photo';
 
 import * as actions from '../actions/photo';
 
@@ -25,12 +25,8 @@ function PhotoList(props) {
 
     const { album, photos: { photos }, getPhotos } = props;
 
-    const [progress, setProgress] = useState(false);
-
     useEffect(() => {
-        setProgress(true);
         getPhotos(album.id);
-        setProgress(false);
     }, []);
 
     const onClose = (id) => {
@@ -39,10 +35,6 @@ function PhotoList(props) {
 
     return (
         <div className={classes.root}>
-            {progress && <CircularProgress
-                data-testid="progress-indicator"
-                className={classes.progress}
-            />}
             <Grid container>
                 {photos && photos.map(photo => (
                     <Photo photo={photo} onClose={onClose} />
@@ -61,6 +53,7 @@ const mapStateToProps = state => {
 const mapDispachToProps = dispatch => {
     return {
         getPhotos: (id) => dispatch(actions.getPhotos(id)),
+        setPhotos: (photos) => dispatch(actions.setPhotos(photos))
     }
 }
 
