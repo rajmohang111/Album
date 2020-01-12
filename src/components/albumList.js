@@ -6,7 +6,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Album from './album';
 
-import * as API from '../Services/Api';
+import * as actions from '../actions/album';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,17 +22,13 @@ const useStyles = makeStyles(theme => ({
 function AlbumList(props) {
   const classes = useStyles();
 
-  const { albums } = props.albums;
+  const { albums : { albums }, getAlbums } = props;
   const [progress, setProgress] = useState(false);
 
   useEffect(() => {
     setProgress(true);
-    API.getAlbums()
-      .then(res => {
-        props.setAlbums(res);
-        setProgress(false);
-      }
-      );
+    getAlbums();
+    setProgress(false);
   }, []);
 
   return (
@@ -55,7 +52,8 @@ const mapStateToProps = state => {
 
 const mapDispachToProps = dispatch => {
   return {
-    setAlbums: (albums) => dispatch({ type: "SET_ALBUMS", payload: albums }),
+    getAlbums: () => dispatch(actions.getAlbum()),
+    setAlbums: (albums) => dispatch(actions.setAlbum(albums)),
   }
 }
 

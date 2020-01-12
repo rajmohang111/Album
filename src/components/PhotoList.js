@@ -7,7 +7,7 @@ import Grid from '@material-ui/core/Grid';
 
 import Photo from './Photo';
 
-import * as API from '../Services/Api';
+import * as actions from '../actions/photo';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -23,18 +23,14 @@ const useStyles = makeStyles(theme => ({
 function PhotoList(props) {
     const classes = useStyles();
 
-    const { album, photos: { photos } } = props;
+    const { album, photos: { photos }, getPhotos } = props;
 
     const [progress, setProgress] = useState(false);
 
     useEffect(() => {
         setProgress(true);
-        API.getPhotos(album.id)
-            .then(res => {
-                props.setPhotos(res);
-                setProgress(false);
-            }
-            );
+        getPhotos(album.id);
+        setProgress(false);
     }, []);
 
     const onClose = (id) => {
@@ -49,7 +45,7 @@ function PhotoList(props) {
             />}
             <Grid container>
                 {photos && photos.map(photo => (
-                    <Photo photo={photo} onClose={onClose}/>
+                    <Photo photo={photo} onClose={onClose} />
                 ))}
             </Grid>
         </div >
@@ -64,7 +60,7 @@ const mapStateToProps = state => {
 
 const mapDispachToProps = dispatch => {
     return {
-        setPhotos: (photos) => dispatch({ type: "SET_PHOTOS", payload: photos }),
+        getPhotos: (id) => dispatch(actions.getPhotos(id)),
     }
 }
 

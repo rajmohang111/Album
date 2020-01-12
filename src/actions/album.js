@@ -1,7 +1,19 @@
-import fetch from "cross-fetch";
 
-export function list() {
+import * as API from '../Services/Api';
+
+export function setAlbum(albums) {
   return (dispatch, getState) => {
-    // Implement list albums action here.
+    dispatch({ type: "SET_ALBUMS", payload: albums })
   };
 }
+
+export function getAlbum(albums) {
+  return (dispatch, getState) => {
+    API.getAlbums()
+      .then(albums => {
+        dispatch({ type: "SET_ALBUMS", payload: albums })
+      }
+      );
+  };
+}
+

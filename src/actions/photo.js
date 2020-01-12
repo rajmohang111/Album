@@ -1,13 +1,13 @@
-import fetch from "cross-fetch";
 
-const API_ENDPOINT = 'https://jsonplaceholder.typicode.com';
+import * as API from '../Services/Api';
 
-const ALBUMS_LIMIT = 25; // hardcoded as per requirement
-
-export function list(albumId) {
+export function getPhotos(id) {
   return (dispatch, getState) => {
-    // Implement list photos action here.
-    const albums = await fetch(`${API_ENDPOINT}/photos?albumId=${albumId}&_limit=${ALBUMS_LIMIT}`);
-    return albums.json();
+    API.getPhotos(id)
+      .then(photos => {
+        dispatch({ type: "SET_PHOTOS", payload: photos })
+      }
+      );
   };
 }
+

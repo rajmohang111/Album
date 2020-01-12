@@ -21,7 +21,11 @@ const useStyles = makeStyles(theme => ({
     closeBtn: {
         position: 'absolute',
         zIndex: 1,
+        marginLeft: '100px'
     },
+    closeButton: {
+        float: 'right'
+    }
 }));
 
 export default function Photo(props) {
@@ -54,13 +58,13 @@ export default function Photo(props) {
             <img src={photo.thumbnailUrl} alt={photo.title} onClick={showImage}/>
             <Dialog className={classes.root} open={open}>
                 <DialogTitle>
-                    View Photo
+                     Full View
                        <IconButton aria-label="close" className={classes.closeButton} onClick={closeModal}>
                         <CloseIcon />
                     </IconButton>
                 </DialogTitle>
                 <DialogContent>
-                     <img src={photo.url} alt={photo.title} />
+                     <img src={photo.url} alt={photo.title} width="100%" />
                 </DialogContent>
             </Dialog>
         </Grid>
