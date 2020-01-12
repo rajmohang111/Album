@@ -6,5 +6,6 @@ A simple gallery web app that displays a list of albums/photos.
 
 ```js
 $ npm i
+$ npm test
 $ npm start
 ```
