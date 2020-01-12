@@ -4,9 +4,9 @@ const initialState = [];
 
 export const albumReducer = handleActions({
    SET_ALBUMS: (state, action) => {
-       console.log('"SET_ALBUMS"', action)
        return {
-       albums : [...action.payload]
+          ...state,
+       albums : action.payload
     }
    }
   }, initialState);
