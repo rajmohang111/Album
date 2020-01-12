@@ -6,17 +6,20 @@ import {
     Dialog,
     DialogContent,
     DialogTitle,
-    IconButton
-  } from '@material-ui/core';
-  import CloseIcon from '@material-ui/icons/Close';
+    IconButton,
+    Typography
+} from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 
 
 const useStyles = makeStyles(theme => ({
     icon: {
         color: 'rgba(255, 255, 255, 0.54)',
     },
-    imgFullHeight: {
-        height: 'auto',
+    title: {
+        position: 'absolute',
+        marginTop: '50px',
+        width: '150px'
     },
     closeBtn: {
         position: 'absolute',
@@ -34,6 +37,7 @@ export default function Photo(props) {
     const { photo } = props;
 
     const [open, setOpen] = useState(false);
+    const [showTitle, setShowTitle] = useState(false);
 
 
     const onClose = (id) => {
@@ -48,23 +52,35 @@ export default function Photo(props) {
         setOpen(false);
     };
 
+    const displayTitle = () => {
+        setShowTitle(true);
+    };
+
+    const hideTitle = () => {
+        setShowTitle(false);
+    };
+
     return (
         <Grid item xs={3}>
-            <IconButton
-                onClick={() => onClose(photo.id)}
-                className={classes.closeBtn}>
-                <CancelIcon color="inherit" />
-            </IconButton>
-            <img src={photo.thumbnailUrl} alt={photo.title} onClick={showImage}/>
+            <span onMouseEnter={displayTitle} onMouseLeave={hideTitle}>
+                <IconButton
+                    onClick={() => onClose(photo.id)}
+                    className={classes.closeBtn}>
+                    <CancelIcon color="inherit" />
+                </IconButton>
+                {showTitle && <Typography variant="caption" className={classes.title}>{photo.title}
+                </Typography>}
+                <img src={photo.thumbnailUrl} alt={photo.title} width="150px" onClick={showImage} />
+            </span>
             <Dialog className={classes.root} open={open}>
                 <DialogTitle>
-                     Full View
+                    Full View
                        <IconButton aria-label="close" className={classes.closeButton} onClick={closeModal}>
                         <CloseIcon />
                     </IconButton>
                 </DialogTitle>
                 <DialogContent>
-                     <img src={photo.url} alt={photo.title}  />
+                    <img src={photo.url} alt={photo.title} />
                 </DialogContent>
             </Dialog>
         </Grid>
